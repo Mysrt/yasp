@@ -67,7 +67,12 @@ else {
                 capacity: capacity
             });
         }
+        var interval = setInterval(function(){
+          //throw some whitespace every interval to prevent timeout
+          res.write(" ");
+        }, 15000);
         runParse(req.query, function(err, parsed_data) {
+            clearInterval(interval);
             if (err) {
                 console.error("error occurred for query: %s: %s", JSON.stringify(req.query), err.stack || err);
                 res.json({
