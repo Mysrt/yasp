@@ -69,7 +69,7 @@ else {
         }
         var interval = setInterval(function(){
           //throw some whitespace every interval to prevent timeout
-          res.write(" ");
+          res.write("\n");
         }, 15000);
         runParse(req.query, function(err, parsed_data) {
             clearInterval(interval);
