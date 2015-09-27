@@ -75,9 +75,10 @@ else {
             clearInterval(interval);
             if (err) {
                 console.error("error occurred for query: %s: %s", JSON.stringify(req.query), err.stack || err);
-                res.json({
+                res.send(JSON.stringify({
                     error: err.message || err.code || err
-                });
+                }));
+                res.end();
                 //can crash the worker and let master respawn to ensure process cleanup
                 //however, this can result in losing other parses in progress if there is more than one being handled by this worker
                 /*
@@ -87,7 +88,8 @@ else {
                 */
             }
             else {
-                return res.json(parsed_data);
+                res.send(JSON.stringify(parsed_data));
+                res.end();
             }
         });
     });
